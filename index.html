@@ -394,27 +394,9 @@
       <a href="#contact" class="btn-mag btn-mag-primary" id="btn-get-started"><span>Get Started</span><span class="btn-arrow">→</span></a>
       <a href="#contact" class="btn-mag btn-mag-secondary"><span>Book Consultation</span></a>
     </div>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-n" data-target="50">0</div><div class="stat-l">Projects Delivered</div></div>
-      <div class="stat"><div class="stat-n" data-target="8">0</div><div class="stat-l">AI Capabilities</div></div>
-      <div class="stat"><div class="stat-n" data-target="100">0</div><div class="stat-l">% Ownership</div></div>
-      <div class="stat"><div class="stat-n" data-target="24">0</div><div class="stat-l">/ 7 Support</div></div>
-    </div>
   </div>
   <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
-
-<!-- STATS ROW -->
-<div id="stats-row" class="rv">
-  <div class="wrap">
-    <div class="stats-inner">
-      <div class="stat-block"><span class="snum" data-target="50" data-suffix="+">0+</span><span class="slabel">Projects Delivered</span></div>
-      <div class="stat-block"><span class="snum" data-target="8" data-suffix="+">0+</span><span class="slabel">AI Capabilities</span></div>
-      <div class="stat-block"><span class="snum" data-target="100" data-suffix="%">0%</span><span class="slabel">Full Ownership</span></div>
-      <div class="stat-block"><span class="snum" data-target="5" data-suffix="x">0x</span><span class="slabel">Faster MVP</span></div>
-    </div>
-  </div>
-</div>
 
 <!-- CLIENTS -->
 <section id="clients">
@@ -535,9 +517,10 @@
       <div class="rvr">
         <div class="form-wrap">
           <form id="cform" onsubmit="submitForm(event)">
-            <div class="fg"><label>Your Name</label><input type="text" placeholder="Jane Smith" required /></div>
-            <div class="fg"><label>Email Address</label><input type="email" placeholder="jane@company.com" required /></div>
-            <div class="fg"><label>Message</label><textarea placeholder="Tell us about your project, goals, and timeline..." required></textarea></div>
+            <div class="fg"><label>Your Name</label><input name="name" type="text" placeholder="Jane Smith" required /></div>
+            <div class="fg"><label>Email Address</label><input name="email" type="email" placeholder="jane@company.com" required /></div>
+            <div class="fg"><label>Subject</label><input name="subject" type="text" placeholder="Project inquiry" /></div>
+            <div class="fg"><label>Message</label><textarea name="message" placeholder="Tell us about your project, goals, and timeline..." required></textarea></div>
             <button type="submit" class="btn-submit"><span>Send Message &nbsp;→</span></button>
           </form>
         </div>
@@ -837,12 +820,33 @@ function buildMarquee(){
 }
 buildMarquee();
 
-function submitForm(e){
+async function submitForm(e){
   e.preventDefault();
-  const t=document.getElementById('toast');
-  t.classList.add('show');
-  e.target.reset();
-  setTimeout(()=>t.classList.remove('show'),4500);
+  const form = e.target;
+  const data = {
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    subject: form.subject.value.trim() || null,
+    message: form.message.value.trim()
+  };
+  const btn = form.querySelector('.btn-submit span');
+  btn.textContent = 'Sending...';
+  try {
+    const res = await fetch('https://rtpybhrvclyvqpfuvfax.supabase.co/functions/v1/send-contact',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(data)
+    });
+    if(!res.ok) throw new Error(await res.text());
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    form.reset();
+    setTimeout(()=>t.classList.remove('show'),4500);
+  } catch(err) {
+    alert('Something went wrong. Please try again or email us directly.');
+    console.error(err);
+  }
+  btn.textContent = 'Send Message \u00a0→';
 }
 </script>
 </body>
