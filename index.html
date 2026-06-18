@@ -274,6 +274,8 @@
     .foot-links{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.5rem}
     .foot-links a{font-size:0.76rem;color:var(--t3);text-decoration:none;transition:color 0.2s}
     .foot-links a:hover{color:var(--t2)}
+    .foot-linkedin{display:inline-flex;align-items:center;gap:6px}
+    .foot-linkedin svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
     .foot-copy{font-size:0.7rem;color:var(--t4)}
 
     /* TOAST */
@@ -325,16 +327,21 @@
       .nav-links,.nav-actions{display:none}.burger{display:flex}
       .why-grid{grid-template-columns:1fr}
       .tl-wrap{max-width:100%}
-      .tl-line{left:20px}
-      .tl-item{grid-template-columns:auto 1fr;gap:1rem}
-      .tl-item:nth-child(even) .tl-right,.tl-item:nth-child(odd) .tl-left{display:none}
-      .tl-item .tl-right,.tl-item .tl-left{text-align:left!important}
-      .tl-mid{flex-direction:row}
+      .tl-line{left:9px;transform:none}
+      .tl-item{display:flex;flex-direction:row;gap:1rem;margin-bottom:2rem;align-items:flex-start;grid-template-columns:unset}
+      .tl-item .tl-left{order:3;flex:1;text-align:left!important;padding-top:4px}
+      .tl-item .tl-mid{order:1;flex-shrink:0}
+      .tl-item .tl-right{order:2;flex:1;text-align:left!important;padding-top:4px}
+      .tl-item .tl-left:empty,.tl-item .tl-right:empty{display:none}
+      .tl-mid{flex-direction:column;align-items:center;flex-shrink:0}
       .stats-inner{flex-wrap:wrap}
       .stat-block{min-width:50%;border-bottom:1px solid var(--border)}
     }
     @media(max-width:540px){.sol-grid{grid-template-columns:1fr 1fr}.commit-words{gap:1rem}.exp-grid{grid-template-columns:1fr}}
   </style>
+  <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
 </head>
 <body>
 
@@ -394,9 +401,27 @@
       <a href="#contact" class="btn-mag btn-mag-primary" id="btn-get-started"><span>Get Started</span><span class="btn-arrow">→</span></a>
       <a href="#contact" class="btn-mag btn-mag-secondary"><span>Book Consultation</span></a>
     </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-n" data-target="50">0</div><div class="stat-l">Projects Delivered</div></div>
+      <div class="stat"><div class="stat-n" data-target="8">0</div><div class="stat-l">AI Capabilities</div></div>
+      <div class="stat"><div class="stat-n" data-target="100">0</div><div class="stat-l">% Ownership</div></div>
+      <div class="stat"><div class="stat-n" data-target="24">0</div><div class="stat-l">/ 7 Support</div></div>
+    </div>
   </div>
   <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
+
+<!-- STATS ROW -->
+<div id="stats-row" class="rv">
+  <div class="wrap">
+    <div class="stats-inner">
+      <div class="stat-block"><span class="snum" data-target="50" data-suffix="+">0+</span><span class="slabel">Projects Delivered</span></div>
+      <div class="stat-block"><span class="snum" data-target="8" data-suffix="+">0+</span><span class="slabel">AI Capabilities</span></div>
+      <div class="stat-block"><span class="snum" data-target="100" data-suffix="%">0%</span><span class="slabel">Full Ownership</span></div>
+      <div class="stat-block"><span class="snum" data-target="5" data-suffix="x">0x</span><span class="slabel">Faster MVP</span></div>
+    </div>
+  </div>
+</div>
 
 <!-- CLIENTS -->
 <section id="clients">
@@ -536,6 +561,7 @@
   <div class="foot-links">
     <a href="#why">Why Us</a><a href="#expertise">AI Expertise</a><a href="#solutions">Solutions</a>
     <a href="#consulting">Consulting</a><a href="#vision">Vision</a><a href="mailto:support@tactixind.com">support@tactixind.com</a>
+    <a href="https://www.linkedin.com/company/techtactix-cloud-tech-solutions-pvt-ltd" target="_blank" rel="noopener noreferrer" class="foot-linkedin"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
   </div>
   <p class="foot-copy">&copy; 2024 TechTacTix Cloud Tech Solutions Pvt Ltd. All rights reserved.</p>
 </footer>
